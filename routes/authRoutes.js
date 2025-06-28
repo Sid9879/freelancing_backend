@@ -21,7 +21,7 @@ router.get('/me',authMiddleware, me);
 router.get('/getUser',authMiddleware,getSingleUser);
 router.post('/logout',authMiddleware,logoutUser);
 router.get('/check',authMiddleware,checkAuth)
-router.post('/contact',authMiddleware,sendemail)
+router.post('/contact',sendemail)
 
 
 module.exports = router;
