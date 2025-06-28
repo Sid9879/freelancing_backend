@@ -47,7 +47,7 @@ const LoginUSer = async(req,res)=>{
          const token = jwt.sign({_id:user._id,email:user.email,role:user.role},process.env.JWT_SECRET, {expiresIn: '1d'});
          res.cookie("token",token,{
            httpOnly: true,
-  secure: false,   
+  secure: true,   
   sameSite: 'Lax',
   maxAge: 24 * 60 * 60 * 1000
          })
