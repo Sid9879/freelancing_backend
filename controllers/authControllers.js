@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
  const { validationResult } = require('express-validator');
+ const sendContactMail = require('../utils/sendContactMail');
 
 const registerUser = async(req,res)=>{
     const {name,role,email,password,phone}= req.body;
@@ -92,10 +93,23 @@ const checkAuth = (req, res) => {
   }
 };
 
+const sendemail = async(req,res)=>{
+  const { name, email, subject, message } = req.body;
+
+  try {
+    await sendContactMail({ name, email, subject, message });
+    res.status(200).json({ message: 'Message sent successfully!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to send message' });
+  }
+}
+
 module.exports = {
     registerUser,
     LoginUSer,
     getSingleUser,
     logoutUser,
-    checkAuth
+    checkAuth,
+    sendemail
 }
