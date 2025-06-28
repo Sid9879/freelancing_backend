@@ -101,7 +101,7 @@ const sendemail = async(req,res)=>{
     res.status(200).json({ message: 'Message sent successfully!' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to send message' });
+    res.status(500).json({ error: 'Failed to send message' ,err: err.message });
   }
 }
 
