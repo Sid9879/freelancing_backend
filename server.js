@@ -11,7 +11,7 @@ const userRoutes = require('./routes/userRoutes');
 
 
 app.use(cors({
-    origin:process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin:process.env.CORS_ORIGIN || 'https://quick-hire-hub.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     allowedHeaders: ['Content-Type',
          'Authorization',
