@@ -1,5 +1,33 @@
 const mongoose = require('mongoose');
 
+const projectSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 100
+    },
+    description: {
+        type: String,
+        trim: true,
+        maxlength: 500 
+    },
+    projectLink: {
+        type: String,
+        required: true,
+        trim: true,
+        match: [/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/, 'Please use a valid URL']
+    },
+    completedDate: {
+        type: Date
+    },
+    technologiesUsed: [{
+        type: String,
+        trim: true
+    }]
+},{timestamps:true});
+
+
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -96,5 +124,21 @@ postedJobs:[{
  
 avgRating: { type: Number, default: 0 }
 });
+
+userSchema.add({
+  resetToken:{
+    type:String,
+    default:null
+  },
+  resetTokenValidity:{
+    type:Date
+  },
+  bio:{
+    type:String,
+    default:"",
+    maxlength:300
+  },
+  projects: [projectSchema],
+})
 
 module.exports = mongoose.model('User', userSchema);

@@ -10,7 +10,10 @@ body('name').notEmpty().withMessage('Name is required'),
   body('role').notEmpty().withMessage('Role is required'),
   body('email').isEmail().withMessage('Valid email is required'),
   body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-  body('phone').notEmpty().withMessage('Phone number is required'),
+  body('phone')
+  .notEmpty().withMessage('Phone number is required')
+  .isLength({ min: 10, max: 10 }).withMessage('Phone number must be 10 digits')
+
 ] ,registerUser);
 
 router.post('/login', LoginUSer);

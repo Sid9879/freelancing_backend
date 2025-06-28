@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  animation: fadeInBody 1s ease-in-out;
+}
+
+/* Animation for the body fade-in */
+@keyframes fadeInBody {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Container for centering */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+}
+
+/* Message Box */
+.message-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeInMessageBox 0.5s ease-out forwards;
+}
+
+/* Animation for message box fade-in */
+@keyframes fadeInMessageBox {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.message-box h1 {
+  color: #d9534f;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.message-box p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.message-box .btn {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+/* Button Hover Animation */
+.message-box .btn:hover {
+  background-color: #c9302c;
+  transform: scale(1);  /* Slight scaling effect when hovered */
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 480px) {
+  .message-box h1 {
+    font-size: 20px;
+  }
+
+  .message-box p {
+    font-size: 14px;
+  }
+
+  .message-box .btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+.btn a{
+  text-decoration: none;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="message-box">
+          <h1>Your token is expired</h1>
+          <p>Your session has expired, please forget password  again to continue.</p>
+          <button onclick="handlesubmit()" class="btn">Go to Forgetpassword</button>
+        </div>
+      </div>
+
+      <script>
+        const handlesubmit = ()=>{
+          window.location.href = "http://localhost:5173/forgetpassword";
+        }
+      </script>
+</body>
+</html>
