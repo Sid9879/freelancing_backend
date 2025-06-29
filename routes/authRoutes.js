@@ -23,7 +23,7 @@ router.post('/logout',authMiddleware,logoutUser);
 router.get('/check',authMiddleware,checkAuth)
 router.post('/contact',sendemail)
 router.post("/google-login", googleLogin);
-router.post('/set-role', protect, setRole);
+router.post('/set-role', authMiddleware, setRole);
 
 
 module.exports = router;
