@@ -151,6 +151,20 @@ const googleLogin = async (req, res) => {
   }
 };
 
+const setRole = async (req, res) => {
+  const { role } = req.body;
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.role = role;
+    await user.save();
+    res.status(200).json({ message: "Role set successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
 
 module.exports = {
     registerUser,
@@ -159,5 +173,6 @@ module.exports = {
     logoutUser,
     checkAuth,
     sendemail,
-    googleLogin 
+    googleLogin,
+    setRole
 }

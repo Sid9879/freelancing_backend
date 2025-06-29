@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, LoginUSer, getSingleUser, logoutUser, checkAuth, sendemail, googleLogin } = require('../controllers/authControllers');
+const { registerUser, LoginUSer, getSingleUser, logoutUser, checkAuth, sendemail, googleLogin, setRole } = require('../controllers/authControllers');
 const { body} = require('express-validator');
 const { authMiddleware, me } = require('../middlewares/authMiddleware');
 
@@ -23,6 +23,7 @@ router.post('/logout',authMiddleware,logoutUser);
 router.get('/check',authMiddleware,checkAuth)
 router.post('/contact',sendemail)
 router.post("/google-login", googleLogin);
+router.post('/set-role', protect, setRole);
 
 
 module.exports = router;
