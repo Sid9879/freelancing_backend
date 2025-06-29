@@ -60,9 +60,8 @@ const userSchema = new mongoose.Schema({
 
     phone:{
         type:Number,
-        // required: [true,'phone number is required'],
-        // unique: true,
-        // trim: true,  //changed
+        unique: true,
+  sparse: true
     },
      address: {
     city: {
