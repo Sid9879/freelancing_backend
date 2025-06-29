@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type: String,
         enum: ["freelancer",'client'],
-        required: true,
+        // required: true,  // changed
     },
     email:{
         type: String,
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required: [true,'password is required'],
+        // required: [true,'password is required'],//changed
     },
     profilePicture: {
         type: String,
@@ -60,9 +60,9 @@ const userSchema = new mongoose.Schema({
 
     phone:{
         type:Number,
-        required: [true,'phone number is required'],
-        unique: true,
-        trim: true,
+        // required: [true,'phone number is required'],
+        // unique: true,
+        // trim: true,  //changed
     },
      address: {
     city: {
@@ -139,6 +139,15 @@ userSchema.add({
     maxlength:300
   },
   projects: [projectSchema],
+  
+  googleId: {
+  type: String,
+  unique: true,
+  sparse: true
+}
+
 })
+
+
 
 module.exports = mongoose.model('User', userSchema);

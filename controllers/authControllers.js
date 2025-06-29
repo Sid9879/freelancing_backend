@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
  const { validationResult } = require('express-validator');
  const sendContactMail = require('../utils/sendContactMail');
+ const passport = require('passport')
 
 const registerUser = async(req,res)=>{
     const {name,role,email,password,phone}= req.body;
@@ -105,11 +106,58 @@ const sendemail = async(req,res)=>{
   }
 }
 
+//google login
+
+const googleLogin = async (req, res) => {
+  try {
+    const { profileObj } = req.body; // comes from frontend (Google response)
+    const { googleId, email, name, imageUrl } = profileObj;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = await User.create({
+        googleId,
+        email,
+        name,
+        profilePicture: imageUrl,
+        password: "GOOGLE_AUTH_USER", // Placeholder
+      });
+    }
+
+    const token = jwt.sign(
+      { _id: user._id, email: user.email, role: user.role },
+      JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 24 * 60 * 60 * 1000
+    });
+
+    res.status(200).json({
+      message: "Google login successful",
+      token,
+      user: { name: user.name, role: user.role },
+      success: true
+    });
+
+  } catch (error) {
+    console.error("Google login error:", error);
+    res.status(500).json({ message: "Google login failed", error: error.message });
+  }
+};
+
+
 module.exports = {
     registerUser,
     LoginUSer,
     getSingleUser,
     logoutUser,
     checkAuth,
-    sendemail
+    sendemail,
+    googleLogin 
 }
