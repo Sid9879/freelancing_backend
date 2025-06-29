@@ -108,11 +108,7 @@ createdAt: {
     default: Date.now
 },
 
-},{timestamps: true});
-
-
-userSchema.add({
-  appliedJobs: [{
+appliedJobs: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Job'
   }
@@ -122,11 +118,9 @@ postedJobs:[{
     ref: 'Job'
 }],
  
-avgRating: { type: Number, default: 0 }
-});
+avgRating: { type: Number, default: 0 },
 
-userSchema.add({
-  resetToken:{
+resetToken:{
     type:String,
     default:null
   },
@@ -146,8 +140,6 @@ userSchema.add({
   sparse: true
 }
 
-})
-
-
+},{timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);
