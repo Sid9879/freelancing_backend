@@ -56,7 +56,7 @@ Create a `.env` file in the root and add the following:
 PORT=8090
 MONGO_URI=your_mongodb_connection
 JWT_SECRET=your_jwt_secret
-CORS_ORIGIN=https://quick-hire-hub.vercel.app
+CORS_ORIGIN=http://localhost:5173
 SENDGRID_API_KEY=your_sendgrid_key
 GOOGLE_CLIENT_ID=your_google_oauth_id
 
