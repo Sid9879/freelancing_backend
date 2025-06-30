@@ -151,8 +151,7 @@ const googleLogin = async (req, res) => {
   }
 };
 
-const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // adjust the path as needed
+
 
 const setRole = async (req, res) => {
   const { role } = req.body;
