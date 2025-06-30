@@ -151,19 +151,44 @@ const googleLogin = async (req, res) => {
   }
 };
 
+const jwt = require("jsonwebtoken");
+const User = require("../models/User"); // adjust the path as needed
+
 const setRole = async (req, res) => {
   const { role } = req.body;
+
   try {
     const user = await User.findById(req.user._id);
     if (!user) return res.status(404).json({ message: "User not found" });
-
     user.role = role;
     await user.save();
-    res.status(200).json({ message: "Role set successfully" });
+
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        role: user.role,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+   
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,       
+        sameSite: "None", 
+        maxAge:24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ message: "Role set successfully", user });
+
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
 
 
 module.exports = {
